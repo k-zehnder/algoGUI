@@ -18,11 +18,8 @@ class Maze:
         self.layout, self.window = maze_helpers.get_layout_and_window()
         self.g = self.window['-GRAPH-']
 
+        # 'game loop'
         self.animation_loop()
-
-    # def drawMaze(self):
-    #     maze = helpers.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
-    #     print(maze)
 
     def find_path_to_goal(self, algo):
         algo_dict = {
@@ -35,6 +32,7 @@ class Maze:
         maze_helpers.draw_path_to_treasure()
 
     def animation_loop(self):
+        # get layout and window
         layout, window = maze_helpers.get_layout_and_window()
 
         # draw maze
@@ -71,6 +69,6 @@ if __name__ == "__main__":
         elif event == 'draw path to goal':
             path_to_goal = m.find_path_to_goal('dfs')
             maze_helpers.draw_path_to_treasure(m.window,m.g, path_to_goal, m.player_start_pos, m.opponent_start_pos)
-            # maze_helpers.draw_path_to_treasure(m.window, m.path_to_goal, m.player_start_pos, m.opponent_start_pos)
+
         elif event == 'reset':
             maze_helpers.draw_maze(m.g, m.maze_grid, m.maze_dimensions)

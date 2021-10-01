@@ -1,8 +1,3 @@
-"""
-Python Data Structures - A Game-Based Approach
-Robin Andrews - https://compucademy.net/
-Helper functions for use in GUI.
-"""
 #import config # why?
 from gui_code import config
 import PySimpleGUI as sg
