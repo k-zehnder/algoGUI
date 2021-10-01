@@ -33,7 +33,7 @@ class Maze:
 
     def animation_loop(self):
         # get layout and window
-        layout, window = maze_helpers.get_layout_and_window()
+        #layout, window = maze_helpers.get_layout_and_window()
 
         # draw maze
         maze_helpers.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
