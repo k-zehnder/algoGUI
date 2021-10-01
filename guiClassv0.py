@@ -15,6 +15,7 @@ class Maze:
         self.opponent_start_pos = self.opponent_pos = opponent_start_pos
         self.player_start_pos = player_start_pos
         self.goal_xy = (7, 7)
+        self.current_algo = "dfs"
         self.layout, self.window = maze_helpers.get_layout_and_window()
         self.g = self.window['-GRAPH-']
 
@@ -22,19 +23,23 @@ class Maze:
         self.animation_loop()
 
     def find_path_to_goal(self, algo):
+        # find path to goal using algorithm specified as input argument
         algo_dict = {
                 "dfs" : search.dfs,
                 "bfs" : search.bfs
         }
-        return algo_dict[algo](self.maze_grid, self.player_start_pos, self.goal_xy)
+        # property setter/getter for current_algo?
+        print(f"self.current_algo: {self.current_algo}")
+        return algo_dict[self.current_algo](self.maze_grid, self.player_start_pos, self.goal_xy)
 
-    def draw_path_to_treasure(self):
-        maze_helpers.draw_path_to_treasure()
+    def draw_path_to_goal(self, algo):
+        # find path to treasure
+        path_to_goal = self.find_path_to_goal(algo)
+
+        # draw it
+        maze_helpers.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
 
     def animation_loop(self):
-        # get layout and window
-        #layout, window = maze_helpers.get_layout_and_window()
-
         # draw maze
         maze_helpers.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
 
@@ -60,15 +65,13 @@ if __name__ == "__main__":
             box_y = mouse[1]//config.BOX_SIZE
             letter_location = (box_x * config.BOX_SIZE + 18, box_y * config.BOX_SIZE + 17)
             print(box_x, box_y)
-            g.draw_text('{}'.format(random.choice(string.ascii_uppercase)),
-                        letter_location, font='Courier 25')
 
         elif event == 'text':
             m.window['-TEXT-'].update("hello!")
 
         elif event == 'draw path to goal':
             path_to_goal = m.find_path_to_goal('dfs')
-            maze_helpers.draw_path_to_treasure(m.window,m.g, path_to_goal, m.player_start_pos, m.opponent_start_pos)
+            m.draw_path_to_goal('dfs')
 
         elif event == 'reset':
             maze_helpers.draw_maze(m.g, m.maze_grid, m.maze_dimensions)

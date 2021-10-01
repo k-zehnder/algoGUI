@@ -133,18 +133,31 @@ def draw_maze(g, maze_grid, maze_dimensions):
                 g.draw_rectangle((col * config.BOX_SIZE + 5, row * config.BOX_SIZE + 3), (col * config.BOX_SIZE + config.BOX_SIZE + 5, row * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='white')  
 
 
-def draw_path_to_treasure(window, g, path_to_goal, player_start_pos, opponent_start_pos):
-    # global window, path_to_goal, player_start_pos, opponent_start_pos
-    for i, (x, y) in enumerate(path_to_goal):
-        if (x,y) not in [player_start_pos, path_to_goal[-1]]: 
-            g.draw_rectangle((x * config.BOX_SIZE + 5, y * config.BOX_SIZE + 3), (x * config.BOX_SIZE + config.BOX_SIZE + 5, y * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='green')
-            letter_location = (x * config.BOX_SIZE + 18, y * config.BOX_SIZE + 17)
-            g.draw_text('{}'.format(i),
+# def draw_path_to_treasure():
+#     for i, (x, y) in enumerate(path_to_goal):
+#         if (x,y) not in [player_start_pos, path_to_goal[-1]]: 
+#             g.draw_rectangle((x * config.BOX_SIZE + 5, y * config.BOX_SIZE + 3), (x * config.BOX_SIZE + config.BOX_SIZE + 5, y * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='green')
+#             letter_location = (x * config.BOX_SIZE + 18, y * config.BOX_SIZE + 17)
+#             g.draw_text('{}'.format(i),
+#                         letter_location, font='Courier 25')
+#         else:
+#             g.draw_rectangle((x * config.BOX_SIZE + 5, y * config.BOX_SIZE + 3), (x * config.BOX_SIZE + config.BOX_SIZE + 5, y * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='orange')
+#             letter_location = (x * config.BOX_SIZE + 18, y * config.BOX_SIZE + 17)
+#             g.draw_text('{}'.format(i),
+#                     letter_location, font='Courier 25')
+#         window.refresh()
+#         time.sleep(0.5)
+def draw_treasure(path_to_goal, player_start_pos, window, g):
+        for i, (x, y) in enumerate(path_to_goal):
+            if (x,y) not in [player_start_pos, path_to_goal[-1]]: 
+                g.draw_rectangle((x * config.BOX_SIZE + 5, y * config.BOX_SIZE + 3), (x * config.BOX_SIZE + config.BOX_SIZE + 5, y * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='green')
+                letter_location = (x * config.BOX_SIZE + 18, y * config.BOX_SIZE + 17)
+                g.draw_text('{}'.format(i),
+                            letter_location, font='Courier 25')
+            else:
+                g.draw_rectangle((x * config.BOX_SIZE + 5, y * config.BOX_SIZE + 3), (x * config.BOX_SIZE + config.BOX_SIZE + 5, y * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='orange')
+                letter_location = (x * config.BOX_SIZE + 18, y * config.BOX_SIZE + 17)
+                g.draw_text('{}'.format(i),
                         letter_location, font='Courier 25')
-        else:
-            g.draw_rectangle((x * config.BOX_SIZE + 5, y * config.BOX_SIZE + 3), (x * config.BOX_SIZE + config.BOX_SIZE + 5, y * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='orange')
-            letter_location = (x * config.BOX_SIZE + 18, y * config.BOX_SIZE + 17)
-            g.draw_text('{}'.format(i),
-                    letter_location, font='Courier 25')
-        window.refresh()
-        time.sleep(0.5)
+            window.refresh()
+            time.sleep(0.5)
