@@ -2,7 +2,7 @@
 from gui_code import config
 import heapq
 # import helper_functions as helpers
-from gui_code import helper_functions as helpers
+from gui_code import maze_helper_functions as helpers
 from collections import deque
 
 
