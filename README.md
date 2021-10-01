@@ -3,5 +3,7 @@ Simple GUI App which visualizes the pathfinding process of various algorithms in
 
 
 ## Example Usage
+#### Example in-progress pathfinding using DFS
 ![usage demo 1](screenshots/guiscreenshot1.png)
+#### Example goal found
 ![usage demo 2](screenshots/guiscreenshot2.png)
