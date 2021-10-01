@@ -1,8 +1,3 @@
-"""
-Python Data Structures - A Game-Based Approach
-Robin Andrews - https://compucademy.net/
-Search Algorithms for use in GUI.
-"""
 #import config
 from gui_code import config
 import heapq
