@@ -49,7 +49,7 @@ print(f"path to goal: {path_to_goal}")
 
 BOX_SIZE = 25
 layout = [
-    [sg.Text('Crossword Puzzle Using PySimpleGUI'), sg.Text('', key='-OUTPUT-')],
+    [sg.Text('Maze Solver Using PySimpleGUI'), sg.Text('', key='-OUTPUT-')],
     [sg.Graph((800, 800), (0, 450), (450, 0), key='-GRAPH-',
               change_submits=True, drag_submits=False)],
     [sg.Text("", size=(18, 1), key='-TEXT-')],
