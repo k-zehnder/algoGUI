@@ -22,8 +22,16 @@ class Maze:
         # 'game loop'
         self.animation_loop()
 
+    @property
+    def update_algo_state(self):
+        return(f"current algo: {self.current_algo}")
+
+    @update_algo_state.setter
+    def update_algo_state(self, algo):
+        self.current_algo = algo
+
     def find_path_to_goal(self, algo):
-        # find path to goal using algorithm specified as input argument
+        # find path to goal using algorithm specified from input argument
         algo_dict = {
                 "dfs" : search.dfs,
                 "bfs" : search.bfs
@@ -48,6 +56,7 @@ if __name__ == "__main__":
         config.MAZE_FILE)
 
     m = Maze(maze_grid, maze_dimensions, maze_obstacles, player_start_pos, opponent_start_pos)
+    m.update_algo_state = "bfs"
     #m.drawMaze()
 
     # Event Loop
@@ -67,7 +76,10 @@ if __name__ == "__main__":
             print(box_x, box_y)
 
         elif event == 'text':
-            m.window['-TEXT-'].update("hello!")
+            m.update_algo_state = 'bfs' if m.current_algo == 'dfs' else 'dfs'
+            print(f"updated algo to: {m.current_algo}")
+            m.window['-TEXT-'].update(f"Current search algorithm: {m.current_algo}")
+
 
         elif event == 'draw path to goal':
             path_to_goal = m.find_path_to_goal('dfs')
