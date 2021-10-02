@@ -10,4 +10,4 @@ Simple GUI App which visualizes the pathfinding process of various algorithms in
 ![usage demo 1](screenshots/guiscreenshot2.png)
 
 #### Example goal found
-![usage demo 2](screenshots/guiscreenshot3.png)
+![usage demo 3](screenshots/guiscreenshot3.png)
