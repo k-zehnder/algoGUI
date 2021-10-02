@@ -1,6 +1,6 @@
 # MAZE_FILE = "gui_mazes/square_maze_25x25.txt"
 # MAZE_FILE = "gui_mazes/pacman_maze.txt"
-MAZE_FILE = "/home/batman/Desktop/tmp/gui_code/gui_mazes/test_maze.txt"
+MAZE_FILE = "/home/batman/Desktop/algoGUI/gui_code/gui_mazes/test_maze.txt"
 # MAZE_FILE = "gui_mazes/wide_maze.txt"
 # MAZE_FILE = "gui_mazes/diagonal_23x23.txt"
 # MAZE_FILE = "gui_mazes/walled_garden_10x10.txt"

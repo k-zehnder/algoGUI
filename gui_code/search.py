@@ -34,7 +34,8 @@ def dfs(board, start, goal):
         for direction in ["up", "right", "down", "left"]:  # Other orders are fine too.
             row_offset, col_offset = config.offsets[direction]
             neighbour = (current[0] + row_offset, current[1] + col_offset)
-            print(f"{len(full_path)-1}--current: {current}, dir: {direction}, neighbour: {neighbour}, stack: {stack}")
+            #NOTE: Uncomment line below to show how stack is operating
+            #print(f"{len(full_path)-1}--current: {current}, dir: {direction}, neighbour: {neighbour}, stack: {stack}")
             if helpers.is_legal_pos(board, neighbour) and neighbour not in visited:
                 stack.append(neighbour)
                 visited.add(neighbour)
