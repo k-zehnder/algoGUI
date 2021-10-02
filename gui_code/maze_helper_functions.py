@@ -23,7 +23,7 @@ def grid_pos_from_screen_coords(pos, dimensions):
     i = int((20 * (m / 2) - y) / 20)
     return (i, j)
 
-def read_maze_from_file_2(file_name):
+def read_maze_from_file(file_name):
     """
     Reads a maze stored in a text file and returns a 2d list containing the maze representation.
     """

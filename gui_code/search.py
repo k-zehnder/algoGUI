@@ -29,6 +29,7 @@ def dfs(board, start, goal):
         current = stack.pop()
         print(f"current: {current}")
         full_path.append(current)
+        visited.add(current)
         if current == goal:
             return full_path
         for direction in ["up", "right", "down", "left"]:  # Other orders are fine too.
@@ -39,6 +40,7 @@ def dfs(board, start, goal):
             if helpers.is_legal_pos(board, neighbour) and neighbour not in visited:
                 stack.append(neighbour)
                 visited.add(neighbour)
+    return full_path
 
 def bfs(board, start, goal):
     queue = deque()
@@ -49,6 +51,7 @@ def bfs(board, start, goal):
     while queue:
         current = queue.popleft()
         full_path.append(current)
+        visited.add(current)
         if current == goal:
             return full_path
         for direction in ["up", "right", "down", "left"]:
@@ -57,6 +60,7 @@ def bfs(board, start, goal):
             if helpers.is_legal_pos(board, neighbour) and neighbour not in visited:
                 queue.append(neighbour)
                 visited.add(neighbour)
+    return full_path
 
 
 def heuristic(a, b):

@@ -43,6 +43,7 @@ class Maze:
     def draw_path_to_goal(self, algo):
         # find path to treasure
         path_to_goal = self.find_path_to_goal(algo)
+        print(f"path to goal: {path_to_goal}")
 
         # draw it
         maze_helpers.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
@@ -52,7 +53,7 @@ class Maze:
         maze_helpers.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
 
 if __name__ == "__main__":
-    maze_grid, maze_dimensions, maze_obstacles, player_start_pos, opponent_start_pos = maze_helpers.read_maze_from_file_2(
+    maze_grid, maze_dimensions, maze_obstacles, player_start_pos, opponent_start_pos = maze_helpers.read_maze_from_file(
         config.MAZE_FILE)
 
     m = Maze(maze_grid, maze_dimensions, maze_obstacles, player_start_pos, opponent_start_pos)
@@ -70,9 +71,9 @@ if __name__ == "__main__":
             mouse = values['-GRAPH-']
             if mouse == (None, None):
                 continue
+            print(mouse[0], mouse[1])
             box_x = mouse[0]//config.BOX_SIZE
             box_y = mouse[1]//config.BOX_SIZE
-            letter_location = (box_x * config.BOX_SIZE + 18, box_y * config.BOX_SIZE + 17)
             print(box_x, box_y)
 
         elif event == 'text':
@@ -82,8 +83,8 @@ if __name__ == "__main__":
 
 
         elif event == 'draw path to goal':
-            path_to_goal = m.find_path_to_goal('dfs')
-            m.draw_path_to_goal('dfs')
+            path_to_goal = m.find_path_to_goal(m.current_algo)
+            m.draw_path_to_goal(m.current_algo)
 
         elif event == 'reset':
             maze_helpers.draw_maze(m.g, m.maze_grid, m.maze_dimensions)
