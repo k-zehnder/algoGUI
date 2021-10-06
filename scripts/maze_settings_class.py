@@ -20,3 +20,4 @@ class MazeSettings:
         self.SOUND=False
         self.BOX_SIZE=25
 
+

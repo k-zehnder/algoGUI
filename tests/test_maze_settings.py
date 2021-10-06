@@ -1,4 +1,4 @@
-from scripts.settings import MazeSettings
+from scripts.maze_settings_class import MazeSettings
 
 class Test:
     settings_object = MazeSettings()
