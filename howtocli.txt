@@ -1,0 +1,1 @@
+(testenv) Kevins-MBP:algoGUI peppermint$ PYTHONPATH=$(pwd)/ python3 -m pytest
