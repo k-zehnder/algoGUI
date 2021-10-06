@@ -2,27 +2,6 @@ from gui_code import config
 import PySimpleGUI as sg
 import time
 
-def screen_coords_from_grid_pos(pos, grid_dimensions):
-    """
-    Converts grid-based coordinates to screen based coordinates.
-    """
-    i, j = pos
-    # 20 here is a turtle size of 18 plus 1 px border each side, so the size of one "cell".
-    screen_x = - ((grid_dimensions[1] - 1) / 2 * 20) + (j * 20)
-    screen_y = ((grid_dimensions[0] - 1) / 2 * 20) - (i * 20)
-    return (screen_x, screen_y)
-
-
-def grid_pos_from_screen_coords(pos, dimensions):
-    """
-    Converts screen-based coordinates to grid-based coordinates.
-    """
-    x, y = pos
-    m, n = dimensions
-    j = int((20 * (n / 2) + x) / 20)
-    i = int((20 * (m / 2) - y) / 20)
-    return (i, j)
-
 def read_maze_from_file(file_name):
     """
     Reads a maze stored in a text file and returns a 2d list containing the maze representation.
@@ -59,16 +38,6 @@ def read_maze_from_file(file_name):
     except OSError:
         print("There is a problem with the file you have selected.")
         raise SystemExit
-
-
-def is_legal_pos(board, pos):
-    """
-    Determines whether a supplied position is legal in the context of a supplied board.
-    """
-    i, j = pos
-    rows = len(board)
-    cols = len(board[0])
-    return 0 <= i < rows and 0 <= j < cols and board[i][j] != config.OBSTACLE
 
 def get_layout_and_window():
     layout = [
