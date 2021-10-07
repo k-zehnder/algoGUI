@@ -48,7 +48,3 @@ class MazeHelpers(MazeSettings):
         except OSError:
             print("There is a problem with the file you have selected.")
             raise SystemExit
-
-mh = MazeHelpers()
-dict1 = mh.read_maze_from_file()
-print(dict1)

@@ -1,3 +1,6 @@
+import PySimpleGUI as sg
+
+
 class MazeSettings:
     def __init__(self):
         self.offsets = {
@@ -19,5 +22,14 @@ class MazeSettings:
         self.GAME_OVER_FONT=("Courier", 18, "normal")
         self.SOUND=False
         self.BOX_SIZE=25
+        self.layout=[
+            [sg.Text('Maze Solver Using PySimpleGUI'), sg.Text('', key='-OUTPUT-')],
+            [sg.Graph((800, 800), (0, 450), (450, 0), key='-GRAPH-',
+                        change_submits=True, drag_submits=False)],
+            [sg.Text("", size=(50, 2), key='-TEXT-')],
+            [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('text'), sg.Button('exit')]
+            ]
+            self.window=sg.Window('Window Title', self.layout, finalize=True)
 
+        self.window = sg.Window('Window Title', layout, finalize=True)
 
