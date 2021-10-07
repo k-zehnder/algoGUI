@@ -29,7 +29,6 @@ class MazeSettings:
             [sg.Text("", size=(50, 2), key='-TEXT-')],
             [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('text'), sg.Button('exit')]
             ]
-            self.window=sg.Window('Window Title', self.layout, finalize=True)
+        self.window=sg.Window('Window Title', self.layout, finalize=True)
 
-        self.window = sg.Window('Window Title', layout, finalize=True)
 
