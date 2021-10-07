@@ -48,4 +48,3 @@ class MazeHelpers(MazeSettings):
         except OSError:
             print("There is a problem with the file you have selected.")
             raise SystemExit
-
