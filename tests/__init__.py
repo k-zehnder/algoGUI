@@ -3,6 +3,5 @@
 import os
 import sys
 
-if __name__ == "__main__":
-    ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    sys.path.insert(0, os.path.join(ROOT_DIR, "scripts"))
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT_DIR, "scripts"))
