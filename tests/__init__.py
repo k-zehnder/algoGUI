@@ -1,5 +1,8 @@
 # NOTE: https://stackoverflow.com/questions/57273945/imports-break-vscode-testing-with-pytest
 
+import os
 import sys
-sys.path.insert(0, '/home/batman/Desktop/algoGUI/scripts')
-# from package1.module1 import module1
+
+if __name__ == "__main__":
+    ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, os.path.join(ROOT_DIR, "scripts"))

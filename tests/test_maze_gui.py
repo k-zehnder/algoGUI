@@ -35,16 +35,17 @@ class Test:
 
     def test_gui_init(self):
         pass
-
-# self.maze_grid = maze_grid
-# self.maze_dimensions = maze_dimensions
-# self.maze_obstacles = maze_obstacles
-# self.opponent_start_pos = self.opponent_pos = opponent_start_pos
-# self.player_start_pos = player_start_pos
-# self.goal_xy = (7, 7)
-# self.current_algo = "dfs"
-# self.layout, self.window = maze_helpers.get_layout_and_window()
-# self.g = self.window['-GRAPH-']
+        
+        #NOTE: these given to constructor in guiClassv0.py version
+        # self.maze_grid = maze_grid
+        # self.maze_dimensions = maze_dimensions
+        # self.maze_obstacles = maze_obstacles
+        # self.opponent_start_pos = self.opponent_pos = opponent_start_pos
+        # self.player_start_pos = player_start_pos
+        # self.goal_xy = (7, 7)
+        # self.current_algo = "dfs"
+        # self.layout, self.window = maze_helpers.get_layout_and_window()
+        # self.g = self.window['-GRAPH-']
 
     def test_dfs_search(self):
         pass
