@@ -1,4 +1,4 @@
-from scripts.maze_settings_class import MazeSettings
+from maze_settings_class import MazeSettings
 
 class MazeHelpers(MazeSettings):
     def __init__(self):
@@ -48,6 +48,10 @@ class MazeHelpers(MazeSettings):
         except OSError:
             print("There is a problem with the file you have selected.")
             raise SystemExit
+
+
+    def find_goal_path(self):
+        pass
 
 if __name__ == "__main__":
     mh = MazeHelpers()

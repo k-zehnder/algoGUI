@@ -81,7 +81,6 @@ if __name__ == "__main__":
             print(f"updated algo to: {m.current_algo}")
             m.window['-TEXT-'].update(f"Current search algorithm: {m.current_algo}")
 
-
         elif event == 'draw path to goal':
             path_to_goal = m.find_path_to_goal(m.current_algo)
             m.draw_path_to_goal(m.current_algo)

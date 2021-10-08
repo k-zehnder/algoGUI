@@ -13,8 +13,8 @@ class Test:
                                             "down": (0, 1)
                                             }
 
-    def test_maze_file(self):
-        assert self.settings_object.MAZE_FILE == os.path.join(self.ROOT_DIR, "gui_code/gui_mazes/test_maze.txt")
+    # def test_maze_file(self):
+    #     assert self.settings_object.MAZE_FILE == os.path.join(self.ROOT_DIR, "gui_code/gui_mazes/test_maze.txt")
 
     def test_constants(self):
         assert self.settings_object.PLAYER == "P"
