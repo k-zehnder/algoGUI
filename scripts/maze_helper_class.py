@@ -48,3 +48,8 @@ class MazeHelpers(MazeSettings):
         except OSError:
             print("There is a problem with the file you have selected.")
             raise SystemExit
+
+if __name__ == "__main__":
+    mh = MazeHelpers()
+    params_dict = mh.read_maze_from_file()
+    print({k:v for k,v in params_dict.items()})

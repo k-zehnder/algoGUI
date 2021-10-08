@@ -1,7 +1,9 @@
+import os
 from scripts.maze_settings_class import MazeSettings
 
 class Test:
     settings_object = MazeSettings()
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__)) 
 
     def test_offsets(self):
         assert self.settings_object.offsets == {
@@ -12,7 +14,7 @@ class Test:
                                             }
 
     def test_maze_file(self):
-        assert self.settings_object.MAZE_FILE == "/Users/peppermint/Desktop/codes/python/algoGUI/scripts/gui_code/gui_mazes/test_maze.txt"
+        assert self.settings_object.MAZE_FILE == os.path.join(self.ROOT_DIR, "gui_code/gui_mazes/test_maze.txt")
 
     def test_constants(self):
         assert self.settings_object.PLAYER == "P"
