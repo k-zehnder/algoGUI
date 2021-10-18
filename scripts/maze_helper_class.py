@@ -3,8 +3,6 @@ from sys import path
 import PySimpleGUI as sg
 import random
 import string
-from gui_code import maze_helper_functions as maze_helpers
-from gui_code import config
 from gui_code import search
 
 from maze_settings_class import MazeSettings
@@ -58,8 +56,9 @@ class MazeHelpers(MazeSettings):
             print("There is a problem with the file you have selected.")
             raise SystemExit
 
-class Maze:
+class Maze(MazeSettings):
     def __init__(self, maze_grid, maze_dimensions, maze_obstacles, player_start_pos, opponent_start_pos, *args, **kwargs):
+        super().__init__()
         self.maze_grid = maze_grid
         self.maze_dimensions = maze_dimensions
         self.maze_obstacles = maze_obstacles
@@ -67,7 +66,7 @@ class Maze:
         self.player_start_pos = player_start_pos
         self.goal_xy = (7, 7)
         self.current_algo = "dfs"
-        self.layout, self.window = maze_helpers.get_layout_and_window()
+        self.layout, self.window = self.get_layout_and_window()
         self.g = self.window['-GRAPH-']
 
         # 'game loop'
@@ -95,30 +94,30 @@ class Maze:
         print(f"path to goal: {path_to_goal}")
 
         # draw it
-        maze_helpers.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
+        self.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
 
     def draw_maze(self, g, maze_grid, maze_dimensions):
         for row in range(maze_dimensions[0]):
             for col in range(maze_dimensions[1]):
                 if maze_grid[row][col] == "*":
-                    g.draw_rectangle((col * config.BOX_SIZE + 5, row * config.BOX_SIZE + 3), (col * config.BOX_SIZE + config.BOX_SIZE + 5, row * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='black')        
+                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='black')        
                 elif maze_grid[row][col] == "P":
-                    g.draw_rectangle((col * config.BOX_SIZE + 5, row * config.BOX_SIZE + 3), (col * config.BOX_SIZE + config.BOX_SIZE + 5, row * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='orange')             
+                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='orange')             
                 elif maze_grid[row][col] == "O":
-                    g.draw_rectangle((col * config.BOX_SIZE + 5, row * config.BOX_SIZE + 3), (col * config.BOX_SIZE + config.BOX_SIZE + 5, row * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='yellow')
+                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='yellow')
                 else:
-                    g.draw_rectangle((col * config.BOX_SIZE + 5, row * config.BOX_SIZE + 3), (col * config.BOX_SIZE + config.BOX_SIZE + 5, row * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='white')  
+                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='white')  
                     
-    def draw_treasure(path_to_goal, player_start_pos, window, g):
+    def draw_treasure(self, path_to_goal, player_start_pos, window, g):
             for i, (x, y) in enumerate(path_to_goal):
                 if (x,y) not in [player_start_pos, path_to_goal[-1]]: 
-                    g.draw_rectangle((x * config.BOX_SIZE + 5, y * config.BOX_SIZE + 3), (x * config.BOX_SIZE + config.BOX_SIZE + 5, y * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='green')
-                    letter_location = (x * config.BOX_SIZE + 18, y * config.BOX_SIZE + 17)
+                    g.draw_rectangle((x * self.BOX_SIZE + 5, y * self.BOX_SIZE + 3), (x * self.BOX_SIZE + self.BOX_SIZE + 5, y * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='green')
+                    letter_location = (x * self.BOX_SIZE + 18, y * self.BOX_SIZE + 17)
                     g.draw_text('{}'.format(i),
                                 letter_location, font='Courier 25')
                 else:
-                    g.draw_rectangle((x * config.BOX_SIZE + 5, y * config.BOX_SIZE + 3), (x * config.BOX_SIZE + config.BOX_SIZE + 5, y * config.BOX_SIZE + config.BOX_SIZE + 3), line_color='red', fill_color='orange')
-                    letter_location = (x * config.BOX_SIZE + 18, y * config.BOX_SIZE + 17)
+                    g.draw_rectangle((x * self.BOX_SIZE + 5, y * self.BOX_SIZE + 3), (x * self.BOX_SIZE + self.BOX_SIZE + 5, y * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='orange')
+                    letter_location = (x * self.BOX_SIZE + 18, y * self.BOX_SIZE + 17)
                     g.draw_text('{}'.format(i),
                             letter_location, font='Courier 25')
                 window.refresh()
@@ -153,8 +152,8 @@ class Maze:
                 if mouse == (None, None):
                     continue
                 print(mouse[0], mouse[1])
-                box_x = mouse[0]//config.BOX_SIZE
-                box_y = mouse[1]//config.BOX_SIZE
+                box_x = mouse[0]//self.BOX_SIZE
+                box_y = mouse[1]//self.BOX_SIZE
                 print(box_x, box_y)
 
             elif event == 'toggle algorithm':
