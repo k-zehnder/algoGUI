@@ -45,10 +45,10 @@ def get_layout_and_window():
     [sg.Graph((800, 800), (0, 450), (450, 0), key='-GRAPH-',
                 change_submits=True, drag_submits=False)],
     [sg.Text("", size=(50, 2), key='-TEXT-')],
-    [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('text'), sg.Button('exit')]
+    [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('toggle algorithm'), sg.Button('exit')]
     ]
 
-    window = sg.Window('Window Title', layout, finalize=True)
+    window = sg.Window('algoGUI', layout, finalize=True)
     return layout, window
 
 

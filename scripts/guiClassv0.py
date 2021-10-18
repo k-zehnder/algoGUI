@@ -58,6 +58,7 @@ if __name__ == "__main__":
 
     m = Maze(maze_grid, maze_dimensions, maze_obstacles, player_start_pos, opponent_start_pos)
     m.update_algo_state = "bfs"
+    m.window['-TEXT-'].update(f"Current search algorithm: {m.current_algo}")
     #m.drawMaze()
 
     # Event Loop
@@ -76,7 +77,7 @@ if __name__ == "__main__":
             box_y = mouse[1]//config.BOX_SIZE
             print(box_x, box_y)
 
-        elif event == 'text':
+        elif event == 'toggle algorithm':
             m.update_algo_state = 'bfs' if m.current_algo == 'dfs' else 'dfs'
             print(f"updated algo to: {m.current_algo}")
             m.window['-TEXT-'].update(f"Current search algorithm: {m.current_algo}")
