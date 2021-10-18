@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     # use MazeHelper to read from file
     # returns params_dict
-    params_dict = helper_class.read_maze_from_file()
+    params_dict = helpers_class.read_maze_from_file()
 
     # instantiate gui with params_dict
     gui = MazeGUI(**params_dict)

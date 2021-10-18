@@ -78,3 +78,13 @@ def draw_treasure(path_to_goal, player_start_pos, window, g):
                         letter_location, font='Courier 25')
             window.refresh()
             time.sleep(0.5)
+
+
+def is_legal_pos(board, pos):
+    """
+    Determines whether a supplied position is legal in the context of a supplied board.
+    """
+    i, j = pos
+    rows = len(board)
+    cols = len(board[0])
+    return 0 <= i < rows and 0 <= j < cols and board[i][j] != config.OBSTACLE
