@@ -1,11 +1,10 @@
-from maze_helper_class import MazeHelpers
-
-class MazeGUI:
-    def __init__(self, **kwargs):
-        self.__dict__.update(kwargs)
+import PySimpleGUI as sg
+from maze_helper_class import MazeHelpers, Maze
 
 
 if __name__ == "__main__":
+    from gui_code import config
+
     # instantiate MazeHelper object
     helpers_class = MazeHelpers()
 
@@ -13,6 +12,7 @@ if __name__ == "__main__":
     # returns params_dict
     params_dict = helpers_class.read_maze_from_file()
 
-    # instantiate gui with params_dict
-    gui = MazeGUI(**params_dict)
-    print(gui.dims)
+    m = Maze(**params_dict)
+    print(m)
+
+
