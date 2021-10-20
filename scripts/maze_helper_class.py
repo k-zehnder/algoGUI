@@ -3,6 +3,7 @@ from sys import path
 import PySimpleGUI as sg
 import random
 import string
+from collections import deque
 from gui_code import search
 
 from maze_settings_class import MazeSettings
@@ -66,8 +67,14 @@ class Maze(MazeSettings):
         self.player_start_pos = player_start_pos
         self.goal_xy = (7, 7)
         self.current_algo = "dfs"
+        self.current = 0
         self.layout, self.window = self.get_layout_and_window()
         self.g = self.window['-GRAPH-']
+        self.algo_dict = {
+                "dfs" : search.dfs,
+                "bfs" : search.bfs,
+                "a_star" : search.a_star
+        }
 
         # 'game loop'
         self.animation_loop()
@@ -82,12 +89,7 @@ class Maze(MazeSettings):
 
     def find_path_to_goal(self, algo):
         # find path to goal using algorithm specified from input argument
-        algo_dict = {
-                "dfs" : search.dfs,
-                "bfs" : search.bfs,
-                "a_star" : search.a_star
-        }
-        return algo_dict[self.current_algo](self.maze_grid, self.player_start_pos, self.goal_xy)
+        return self.algo_dict[self.current_algo](self.maze_grid, self.player_start_pos, self.goal_xy)
 
     def draw_path_to_goal(self, algo):
         # find path to goal
@@ -136,6 +138,16 @@ class Maze(MazeSettings):
         window = sg.Window('algoGUI', layout, finalize=True)
         return layout, window
 
+    def toggle_algo(self):
+        if self.current >= 2:
+            self.current = 0
+        else:
+            self.current += 1
+        #self.current += 1 if self.current <= 3 else 0
+        print(f"self.current: {self.current}")
+        return (list(self.algo_dict.keys())[self.current])
+
+    
     def animation_loop(self):
         self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
 
@@ -158,8 +170,8 @@ class Maze(MazeSettings):
                 print(box_x, box_y)
 
             elif event == 'toggle algorithm':
-                self.update_algo_state = 'bfs' if self.current_algo == 'dfs' else 'dfs'
-                self.update_algo_state = 'a_star'
+                # self.update_algo_state = 'bfs' if self.current_algo == 'dfs' else 'dfs'
+                self.update_algo_state = self.toggle_algo() #self.toggle_algo()
                 print(f"updated algo to: {self.current_algo}")
                 self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
 
