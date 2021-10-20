@@ -41,14 +41,13 @@ class MazeHelpers(MazeSettings):
                         elif maze[i][j] == self.OPPONENT:
                             opponent_start_pos = (i, j)
 
-                # return maze, (num_rows, num_cols_top_row), maze_obstacles, player_start_pos, opponent_start_pos
                 return {
                         "maze_grid" : maze,
                         "maze_dimensions" : (num_rows, num_cols_top_row),
                         "maze_obstacles" : maze_obstacles,
                         "player_start_pos" : player_start_pos,
                         "opponent_start_pos" : opponent_start_pos
-                    }
+                     }
 
         except UnboundLocalError:
             print("The maze needs a player and an opponent.")
@@ -70,11 +69,6 @@ class Maze(MazeSettings):
         self.current = 0
         self.layout, self.window = self.get_layout_and_window()
         self.g = self.window['-GRAPH-']
-        self.algo_dict = {
-                "dfs" : search.dfs,
-                "bfs" : search.bfs,
-                "a_star" : search.a_star
-        }
 
         # 'game loop'
         self.animation_loop()
@@ -88,15 +82,10 @@ class Maze(MazeSettings):
         self.current_algo = algo
 
     def find_path_to_goal(self, algo):
-        # find path to goal using algorithm specified from input argument
         return self.algo_dict[self.current_algo](self.maze_grid, self.player_start_pos, self.goal_xy)
 
     def draw_path_to_goal(self, algo):
-        # find path to goal
         path_to_goal = self.find_path_to_goal(algo)
-        print(f"path to goal: {path_to_goal}")
-
-        # draw it
         self.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
 
     def draw_maze(self, g, maze_grid, maze_dimensions):
@@ -135,7 +124,7 @@ class Maze(MazeSettings):
         [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('toggle algorithm'), sg.Button('exit')]
         ]
 
-        window = sg.Window('algoGUI', layout, finalize=True)
+        window = sg.Window('algoGUI by Kevin Zehnder', layout, finalize=True)
         return layout, window
 
     def toggle_algo(self):
@@ -143,15 +132,10 @@ class Maze(MazeSettings):
             self.current = 0
         else:
             self.current += 1
-        #self.current += 1 if self.current <= 3 else 0
-        print(f"self.current: {self.current}")
         return (list(self.algo_dict.keys())[self.current])
 
-    
     def animation_loop(self):
         self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
-
-        # draw maze
         self.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
 
         while True:            
@@ -164,14 +148,11 @@ class Maze(MazeSettings):
                 mouse = values['-GRAPH-']
                 if mouse == (None, None):
                     continue
-                print(mouse[0], mouse[1])
                 box_x = mouse[0]//self.BOX_SIZE
                 box_y = mouse[1]//self.BOX_SIZE
-                print(box_x, box_y)
 
             elif event == 'toggle algorithm':
-                # self.update_algo_state = 'bfs' if self.current_algo == 'dfs' else 'dfs'
-                self.update_algo_state = self.toggle_algo() #self.toggle_algo()
+                self.update_algo_state = self.toggle_algo() 
                 print(f"updated algo to: {self.current_algo}")
                 self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
 
