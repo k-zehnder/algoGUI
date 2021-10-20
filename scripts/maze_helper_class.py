@@ -115,10 +115,40 @@ class Maze(MazeSettings):
                 window.refresh()
                 time.sleep(0.5)
 
+    # def get_layout_and_window(self):
+    #     list_1 = [sg.Text('Maze Solver Using PySimpleGUI'), sg.Text('', key='-OUTPUT-')]
+
+    #     list_2 = [sg.Graph((800, 800), (0, 450), (450, 0), key='-GRAPH-',
+    #                 change_submits=True, drag_submits=False)],
+        
+    #     list_3 = [sg.Text("", size=(50, 2), key='-TEXT-')]
+
+    #     list_4 = [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('toggle algorithm'), sg.Button('exit')]
+
+    #     layout = [
+    #     [sg.Column([list_1, list_2, list_3, list_4])],
+    #     # [sg.Column([list_2])],
+    #     # [sg.Column([list_3])],
+    #     # [sg.Column([list_4])],
+    #     ]
+        
+    #     layout2 = [
+    #     [
+    #      sg.Column(
+    #         layout,
+    #         expand_x=False,
+    #         expand_y=False,
+    #         vertical_alignment='c',
+    #         background_color='gray',
+    #         key='Column'),]]
+
+    #     window = sg.Window('algoGUI by Kevin Zehnder', layout, size=(800, 800), element_justification='c', finalize=True)
+    #     return layout, window
+
     def get_layout_and_window(self):
         layout = [
-        [sg.Text('Maze Solver Using PySimpleGUI'), sg.Text('', key='-OUTPUT-')],
-        [sg.Graph((800, 800), (0, 450), (450, 0), key='-GRAPH-',
+        [sg.Text('Maze Solver Using PySimpleGUI')],
+        [sg.Graph((600, 600), (0, 275), (275, 0), key='-GRAPH-',
                     change_submits=True, drag_submits=False)],
         [sg.Text("", size=(50, 2), key='-TEXT-')],
         [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('toggle algorithm'), sg.Button('exit')]
@@ -150,6 +180,7 @@ class Maze(MazeSettings):
                     continue
                 box_x = mouse[0]//self.BOX_SIZE
                 box_y = mouse[1]//self.BOX_SIZE
+                print(box_x, box_y)
 
             elif event == 'toggle algorithm':
                 self.update_algo_state = self.toggle_algo() 
