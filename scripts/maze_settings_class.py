@@ -1,5 +1,6 @@
 import os
 from gui_code import search
+
 class MazeSettings:
     def __init__(self):
         self.ROOT_DIR=os.path.dirname(os.path.abspath(__file__)) 
@@ -18,13 +19,9 @@ class MazeSettings:
         self.PLAYER="P"
         self.OPPONENT="O"
         self.OBSTACLE="*"
-        self.GAME_SPEED=100
-        self.TARGET_SCORE=3
+        # self.GAME_SPEED=100
         self.WIDTH=800
-        self.HEIGHT=740
-        self.BUTTON_FONT=('Arial', 12, 'normal')
-        self.SCORE_FONT=("Courier", 24, "bold")
-        self.GAME_OVER_FONT=("Courier", 18, "normal")
+        self.HEIGHT=800
         self.SOUND=False
         self.BOX_SIZE=25
 
