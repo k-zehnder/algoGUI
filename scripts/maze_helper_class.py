@@ -89,14 +89,22 @@ class Maze(MazeSettings):
         self.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
 
     def draw_maze(self, g, maze_grid, maze_dimensions):
+        # NOTE: change to switch case python
         for row in range(maze_dimensions[0]):
             for col in range(maze_dimensions[1]):
                 if maze_grid[row][col] == "*":
                     g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='black')        
                 elif maze_grid[row][col] == "P":
-                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='orange')             
+                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='orange')
+                    letter_location = (col * self.BOX_SIZE + 18, row * self.BOX_SIZE + 17)
+                    g.draw_text('start',
+                                letter_location, font='Courier 15')             
                 elif maze_grid[row][col] == "O":
                     g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='yellow')
+                    letter_location = (col * self.BOX_SIZE + 18, row * self.BOX_SIZE + 17)
+                   
+                    g.draw_text('goal',
+                                letter_location, font='Courier 15')          
                 else:
                     g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='white')  
                     
