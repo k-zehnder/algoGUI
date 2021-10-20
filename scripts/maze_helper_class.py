@@ -84,7 +84,8 @@ class Maze(MazeSettings):
         # find path to goal using algorithm specified from input argument
         algo_dict = {
                 "dfs" : search.dfs,
-                "bfs" : search.bfs
+                "bfs" : search.bfs,
+                "a_star" : search.a_star
         }
         return algo_dict[self.current_algo](self.maze_grid, self.player_start_pos, self.goal_xy)
 
@@ -158,6 +159,7 @@ class Maze(MazeSettings):
 
             elif event == 'toggle algorithm':
                 self.update_algo_state = 'bfs' if self.current_algo == 'dfs' else 'dfs'
+                self.update_algo_state = 'a_star'
                 print(f"updated algo to: {self.current_algo}")
                 self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
 

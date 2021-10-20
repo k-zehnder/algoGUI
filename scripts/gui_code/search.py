@@ -1,8 +1,6 @@
 #import config
 from gui_code import config
 import heapq
-# import helper_functions as helpers
-from gui_code import maze_helper_functions as helpers
 from collections import deque
 
 
@@ -37,7 +35,7 @@ def dfs(board, start, goal):
             neighbour = (current[0] + row_offset, current[1] + col_offset)
             #NOTE: Uncomment line below to show how stack is operating
             #print(f"{len(full_path)-1}--current: {current}, dir: {direction}, neighbour: {neighbour}, stack: {stack}")
-            if helpers.is_legal_pos(board, neighbour) and neighbour not in visited:
+            if is_legal_pos(board, neighbour) and neighbour not in visited:
                 stack.append(neighbour)
                 visited.add(neighbour)
     return full_path
@@ -57,7 +55,7 @@ def bfs(board, start, goal):
         for direction in ["up", "right", "down", "left"]:
             row_offset, col_offset = config.offsets[direction]
             neighbour = (current[0] + row_offset, current[1] + col_offset)
-            if helpers.is_legal_pos(board, neighbour) and neighbour not in visited:
+            if is_legal_pos(board, neighbour) and neighbour not in visited:
                 queue.append(neighbour)
                 visited.add(neighbour)
     return full_path
@@ -85,7 +83,7 @@ def a_star(board, start_pos, goal_pos):
             row_offset, col_offset = config.offsets[direction]
             neighbour = (current_cell_pos[0] + row_offset, current_cell_pos[1] + col_offset)
             new_cost = g_values[current_cell_pos] + 1  # Would be edge weight in a weighted graph
-            if helpers.is_legal_pos(board, neighbour):
+            if is_legal_pos(board, neighbour):
                 # Second check only applies to weighted graph.
                 if neighbour not in g_values or new_cost < g_values[neighbour]:
                     g_values[neighbour] = new_cost
@@ -93,4 +91,12 @@ def a_star(board, start_pos, goal_pos):
                     pq.put(neighbour, f_value)
 
 
+def is_legal_pos(board, pos):
+    """
+    Determines whether a supplied position is legal in the context of a supplied board.
+    """
+    i, j = pos
+    rows = len(board)
+    cols = len(board[0])
+    return 0 <= i < rows and 0 <= j < cols and board[i][j] != config.OBSTACLE
 

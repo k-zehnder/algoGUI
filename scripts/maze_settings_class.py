@@ -14,7 +14,7 @@ class MazeSettings:
         self.OBSTACLE="*"
         self.GAME_SPEED=100
         self.TARGET_SCORE=3
-        self.WIDTH=1200
+        self.WIDTH=800
         self.HEIGHT=740
         self.BUTTON_FONT=('Arial', 12, 'normal')
         self.SCORE_FONT=("Courier", 24, "bold")
