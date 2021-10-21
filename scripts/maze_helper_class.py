@@ -12,7 +12,7 @@ class MazeHelpers(MazeSettings):
     def __init__(self):
         super().__init__()
              
-    def read_maze_from_file(self):
+    def read_maze_from_file(self) -> list:
         """
         Reads a maze stored in a text file and returns a 2d list containing the maze representation.
         """
@@ -62,9 +62,8 @@ class Maze(MazeSettings):
         self.maze_grid = maze_grid
         self.maze_dimensions = maze_dimensions
         self.maze_obstacles = maze_obstacles
-        self.opponent_start_pos = self.opponent_pos = opponent_start_pos
         self.player_start_pos = player_start_pos
-        self.goal_xy = (7, 7)
+        self.goal_xy = opponent_start_pos # (7, 7)
         self.current_algo = "dfs"
         self.path_found = False
         self.current = 0
@@ -78,7 +77,11 @@ class Maze(MazeSettings):
         self.current_algo = algo
 
     def find_path_to_goal(self) -> list:
-        return self.algo_dict[self.current_algo](self.maze_grid, self.player_start_pos, self.goal_xy)
+        return self.algo_dict[self.current_algo](
+                                                self.maze_grid, 
+                                                self.player_start_pos, 
+                                                self.goal_xy
+                                            )
 
     def draw_path_to_goal(self, algo: str):
         path_to_goal = self.find_path_to_goal()
@@ -120,14 +123,21 @@ class Maze(MazeSettings):
 
     def get_layout_and_window(self):
         layout = [
-        [sg.Text('Maze Solver', font="Times 20", justification='center',)],
-        [sg.Graph((600, 600), (0, 260), (260, 0), key='-GRAPH-',
-                    change_submits=True, drag_submits=False)],
-        [sg.Text("", size=(35, 2), font="Times 15", key='-TEXT-')],
-        [sg.Button('draw path to goal'), sg.Button('reset'), sg.Button('toggle algorithm'), sg.Button('exit')]
+            [sg.Text('Maze Solver', font="Times 20", justification='center')],
+            [sg.Graph((600, 600), (0, 260), (260, 0), key='-GRAPH-',
+                        change_submits=True, drag_submits=False)],
+            [sg.Text("", size=(35, 2), font="Times 15", key='-TEXT-')],
+            [sg.Button('draw path to goal'), sg.Button('reset'), sg.Button('toggle algorithm'), sg.Button('exit')]
         ]
 
-        window = sg.Window('algoGUI by Kevin Zehnder', layout, element_justification='c', font="Times 15", resizable=True, finalize=True)
+        window = sg.Window(
+                    'algoGUI by Kevin Zehnder', 
+                    layout, 
+                    element_justification='c', 
+                    font="Times 15", 
+                    resizable=True, 
+                    finalize=True
+                )
         return layout, window
 
     def toggle_algo(self):
@@ -136,7 +146,7 @@ class Maze(MazeSettings):
         else:
             self.current += 1
         return list(self.algo_dict.keys())[self.current]
-
+        
     def animation_loop(self):
         self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
         self.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
