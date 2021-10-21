@@ -66,6 +66,7 @@ class Maze(MazeSettings):
         self.player_start_pos = player_start_pos
         self.goal_xy = (7, 7)
         self.current_algo = "dfs"
+        self.path_found = False
         self.current = 0
         self.layout, self.window = self.get_layout_and_window()
         self.g = self.window['-GRAPH-']
@@ -87,6 +88,7 @@ class Maze(MazeSettings):
     def draw_path_to_goal(self, algo):
         path_to_goal = self.find_path_to_goal(algo)
         self.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
+        self.path_found = True
 
     def draw_maze(self, g, maze_grid, maze_dimensions):
         # NOTE: change to switch case python
@@ -122,36 +124,6 @@ class Maze(MazeSettings):
                             letter_location, font='Courier 25')
                 window.refresh()
                 time.sleep(0.5)
-
-    # def get_layout_and_window(self):
-    #     list_1 = [sg.Text('Maze Solver Using PySimpleGUI'), sg.Text('', key='-OUTPUT-')]
-
-    #     list_2 = [sg.Graph((800, 800), (0, 450), (450, 0), key='-GRAPH-',
-    #                 change_submits=True, drag_submits=False)],
-        
-    #     list_3 = [sg.Text("", size=(50, 2), key='-TEXT-')]
-
-    #     list_4 = [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('toggle algorithm'), sg.Button('exit')]
-
-    #     layout = [
-    #     [sg.Column([list_1, list_2, list_3, list_4])],
-    #     # [sg.Column([list_2])],
-    #     # [sg.Column([list_3])],
-    #     # [sg.Column([list_4])],
-    #     ]
-        
-    #     layout2 = [
-    #     [
-    #      sg.Column(
-    #         layout,
-    #         expand_x=False,
-    #         expand_y=False,
-    #         vertical_alignment='c',
-    #         background_color='gray',
-    #         key='Column'),]]
-
-    #     window = sg.Window('algoGUI by Kevin Zehnder', layout, size=(800, 800), element_justification='c', finalize=True)
-    #     return layout, window
 
     def get_layout_and_window(self):
         layout = [
@@ -192,11 +164,13 @@ class Maze(MazeSettings):
 
             elif event == 'toggle algorithm':
                 self.update_algo_state = self.toggle_algo() 
-                print(f"updated algo to: {self.current_algo}")
+                print(f"[INFO] updated algo to: {self.current_algo}")
                 self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
 
             elif event == 'draw path to goal':
-                path_to_goal = self.find_path_to_goal(self.current_algo)
+                if self.path_found:
+                    print('[INFO] resetting maze...')
+                    self.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
                 self.draw_path_to_goal(self.current_algo)
 
             elif event == 'reset':

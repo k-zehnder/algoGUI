@@ -25,7 +25,6 @@ def dfs(board, start, goal):
 
     while stack:
         current = stack.pop()
-        print(f"current: {current}")
         full_path.append(current)
         visited.add(current)
         if current == goal:
@@ -33,8 +32,6 @@ def dfs(board, start, goal):
         for direction in ["up", "right", "down", "left"]:  # Other orders are fine too.
             row_offset, col_offset = config.offsets[direction]
             neighbour = (current[0] + row_offset, current[1] + col_offset)
-            #NOTE: Uncomment line below to show how stack is operating
-            #print(f"{len(full_path)-1}--current: {current}, dir: {direction}, neighbour: {neighbour}, stack: {stack}")
             if is_legal_pos(board, neighbour) and neighbour not in visited:
                 stack.append(neighbour)
                 visited.add(neighbour)
@@ -92,9 +89,6 @@ def a_star(board, start_pos, goal_pos):
 
 
 def is_legal_pos(board, pos):
-    """
-    Determines whether a supplied position is legal in the context of a supplied board.
-    """
     i, j = pos
     rows = len(board)
     cols = len(board[0])
