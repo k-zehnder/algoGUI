@@ -57,7 +57,7 @@ class MazeHelpers(MazeSettings):
             raise SystemExit
 
 class Maze(MazeSettings):
-    def __init__(self, maze_grid, maze_dimensions, maze_obstacles, player_start_pos, opponent_start_pos, *args, **kwargs):
+    def __init__(self, maze_grid: list, maze_dimensions: tuple, maze_obstacles: list, player_start_pos: tuple, opponent_start_pos: tuple, *args, **kwargs):
         super().__init__()
         self.maze_grid = maze_grid
         self.maze_dimensions = maze_dimensions
@@ -74,24 +74,18 @@ class Maze(MazeSettings):
         # 'game loop'
         self.animation_loop()
 
-    @property
-    def update_algo_state(self):
-        return(f"current algo: {self.current_algo}")
-
-    @update_algo_state.setter
-    def update_algo_state(self, algo):
+    def update_algo_state(self, algo: str):
         self.current_algo = algo
 
-    def find_path_to_goal(self, algo):
+    def find_path_to_goal(self) -> list:
         return self.algo_dict[self.current_algo](self.maze_grid, self.player_start_pos, self.goal_xy)
 
-    def draw_path_to_goal(self, algo):
-        path_to_goal = self.find_path_to_goal(algo)
+    def draw_path_to_goal(self, algo: str):
+        path_to_goal = self.find_path_to_goal()
         self.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
         self.path_found = True
 
-    def draw_maze(self, g, maze_grid, maze_dimensions):
-        # NOTE: change to switch case python
+    def draw_maze(self, g, maze_grid: list, maze_dimensions: tuple):
         for row in range(maze_dimensions[0]):
             for col in range(maze_dimensions[1]):
                 if maze_grid[row][col] == "*":
@@ -104,13 +98,12 @@ class Maze(MazeSettings):
                 elif maze_grid[row][col] == "O":
                     g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='yellow')
                     letter_location = (col * self.BOX_SIZE + 18, row * self.BOX_SIZE + 17)
-                   
                     g.draw_text('goal',
                                 letter_location, font='Courier 15')          
                 else:
                     g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='white')  
                     
-    def draw_treasure(self, path_to_goal, player_start_pos, window, g):
+    def draw_treasure(self, path_to_goal: list, player_start_pos: tuple, window, g):
             for i, (x, y) in enumerate(path_to_goal):
                 if (x,y) not in [player_start_pos, path_to_goal[-1]]: 
                     g.draw_rectangle((x * self.BOX_SIZE + 5, y * self.BOX_SIZE + 3), (x * self.BOX_SIZE + self.BOX_SIZE + 5, y * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='green')
@@ -127,16 +120,14 @@ class Maze(MazeSettings):
 
     def get_layout_and_window(self):
         layout = [
-        [sg.Text('Maze Solver', font="Times 20", justification='center')],
+        [sg.Text('Maze Solver', font="Times 20", justification='center',)],
         [sg.Graph((600, 600), (0, 260), (260, 0), key='-GRAPH-',
                     change_submits=True, drag_submits=False)],
         [sg.Text("", size=(35, 2), font="Times 15", key='-TEXT-')],
         [sg.Button('draw path to goal'), sg.Button('reset'), sg.Button('toggle algorithm'), sg.Button('exit')]
-        #[sg.Text('', pad=, justification='center')],
-
         ]
 
-        window = sg.Window('algoGUI by Kevin Zehnder', layout, element_justification='c', font="Times 15", finalize=True)
+        window = sg.Window('algoGUI by Kevin Zehnder', layout, element_justification='c', font="Times 15", resizable=True, finalize=True)
         return layout, window
 
     def toggle_algo(self):
@@ -144,26 +135,19 @@ class Maze(MazeSettings):
             self.current = 0
         else:
             self.current += 1
-        return (list(self.algo_dict.keys())[self.current])
+        return list(self.algo_dict.keys())[self.current]
 
     def animation_loop(self):
-
         self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
         self.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
 
-        # NOTE: change to switch case python
         while True:            
             event, values = self.window.read()
-            print(event, values)
             if event in (sg.WIN_CLOSED, 'exit'):
                 break
 
-            if event == '-GRAPH-':
-                mouse = values['-GRAPH-']                
-
             elif event == 'toggle algorithm':
-                self.update_algo_state = self.toggle_algo() 
-                print(f"[INFO] updated algo to: {self.current_algo}")
+                self.current_algo = self.toggle_algo()
                 self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
 
             elif event == 'draw path to goal':
