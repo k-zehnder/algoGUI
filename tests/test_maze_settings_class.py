@@ -18,7 +18,7 @@ class Test:
         assert self.settings_object.PLAYER == "P"
         assert self.settings_object.OPPONENT== "O"
         assert self.settings_object.OBSTACLE == "*"
-        # assert self.settings_object.GAME_SPEED == 100
+        assert self.settings_object.GAME_SPEED == 0.25
         assert self.settings_object.WIDTH == 800
         assert self.settings_object.HEIGHT == 800
         assert self.settings_object.SOUND == False

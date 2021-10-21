@@ -19,7 +19,6 @@ class MazeSettings:
         self.PLAYER="P"
         self.OPPONENT="O"
         self.OBSTACLE="*"
-        # self.GAME_SPEED=100
         self.WIDTH=800
         self.HEIGHT=800
         self.SOUND=False
