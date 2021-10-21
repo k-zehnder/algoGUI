@@ -131,7 +131,9 @@ class Maze(MazeSettings):
         [sg.Graph((600, 600), (0, 260), (260, 0), key='-GRAPH-',
                     change_submits=True, drag_submits=False)],
         [sg.Text("", size=(35, 2), font="Times 15", key='-TEXT-')],
-        [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('toggle algorithm'), sg.Button('exit')]
+        [sg.Button('draw path to goal'), sg.Button('reset'), sg.Button('toggle algorithm'), sg.Button('exit')]
+        #[sg.Text('', pad=, justification='center')],
+
         ]
 
         window = sg.Window('algoGUI by Kevin Zehnder', layout, element_justification='c', font="Times 15", finalize=True)
