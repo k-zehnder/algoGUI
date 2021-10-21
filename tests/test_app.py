@@ -2,8 +2,6 @@ from scripts.maze_helper_class import Maze, MazeHelpers
 
 
 class Test:
-    test_cases = []
-    testable_functions = []
     expected_output = {
         "maze_grid" : [
                 ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'], 
