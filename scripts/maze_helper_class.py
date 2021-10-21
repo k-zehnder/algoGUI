@@ -127,14 +127,14 @@ class Maze(MazeSettings):
 
     def get_layout_and_window(self):
         layout = [
-        [sg.Text('Maze Solver Using PySimpleGUI')],
-        [sg.Graph((600, 600), (0, 275), (275, 0), key='-GRAPH-',
+        [sg.Text('Maze Solver', font="Times 20", justification='center')],
+        [sg.Graph((600, 600), (0, 260), (260, 0), key='-GRAPH-',
                     change_submits=True, drag_submits=False)],
-        [sg.Text("", size=(50, 2), key='-TEXT-')],
+        [sg.Text("", size=(30, 2), font="Times 15", key='-TEXT-')],
         [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('toggle algorithm'), sg.Button('exit')]
         ]
 
-        window = sg.Window('algoGUI by Kevin Zehnder', layout, finalize=True)
+        window = sg.Window('algoGUI by Kevin Zehnder', layout, element_justification='c', font="Times 15", finalize=True)
         return layout, window
 
     def toggle_algo(self):
@@ -145,9 +145,11 @@ class Maze(MazeSettings):
         return (list(self.algo_dict.keys())[self.current])
 
     def animation_loop(self):
+
         self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
         self.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
 
+        # NOTE: change to switch case python
         while True:            
             event, values = self.window.read()
             print(event, values)
@@ -155,12 +157,7 @@ class Maze(MazeSettings):
                 break
 
             if event == '-GRAPH-':
-                mouse = values['-GRAPH-']
-                if mouse == (None, None):
-                    continue
-                box_x = mouse[0]//self.BOX_SIZE
-                box_y = mouse[1]//self.BOX_SIZE
-                print(box_x, box_y)
+                mouse = values['-GRAPH-']                
 
             elif event == 'toggle algorithm':
                 self.update_algo_state = self.toggle_algo() 
