@@ -3,11 +3,5 @@ Simple GUI App which visualizes the pathfinding process of various algorithms in
 
 
 ## Example Usage
-#### Example start
-![usage demo 0](screenshots/guiscreenshot0.png)
-
-#### Example in progress pathfinding using BFS
-![usage demo 1](screenshots/guiscreenshot1.png)
-
-#### Example goal found
-![usage demo 2](https://github.com/k-zehnder/algoGUI/blob/main/screenshots/giuscreenshot4.png)
+#### Depth-First Search Demo
+![dfs](screenshots/dfs015.gif)
