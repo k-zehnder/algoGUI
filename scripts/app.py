@@ -1,7 +1,6 @@
 # www.meet-kevin-z.com
 
 if __name__ == "__main__":
-    import PySimpleGUI as sg
     from maze_helper_class import MazeHelpers, Maze
 
     # get parameters for game
