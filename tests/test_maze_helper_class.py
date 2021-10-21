@@ -25,11 +25,3 @@ class Test:
     def test_read_maze_from_file(self):
         params_dict = self.helpers_class.read_maze_from_file()
         assert {k:v for (k, v) in params_dict.items()} == {k:v for (k, v) in self.expected_output.items()}
-
-# {
-#     "maze" : maze,
-#     "dims" : (num_rows, num_cols_top_row),
-#     "maze_obstacles" : maze_obstacles,
-#     "player_start_pos" : player_start_pos,
-#     "opponent_start_pos" : opponent_start_pos
-# }

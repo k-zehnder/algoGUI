@@ -25,32 +25,7 @@ class Test:
 
     helpers_class = MazeHelpers()
     params_dict = helpers_class.read_maze_from_file()       
-    #gui_class = Maze(**params_dict)
-
 
     def test_helpers_init(self):
         assert type(self.params_dict) == type(dict())
         assert {k:v for k,v in self.params_dict.items()} == {k:v for k,v in self.expected_output.items()}
-
-    def test_gui_init(self):
-        pass
-        
-        #NOTE: these given to constructor in guiClassv0.py version
-        # self.maze_grid = maze_grid
-        # self.maze_dimensions = maze_dimensions
-        # self.maze_obstacles = maze_obstacles
-        # self.opponent_start_pos = self.opponent_pos = opponent_start_pos
-        # self.player_start_pos = player_start_pos
-        # self.goal_xy = (7, 7)
-        # self.current_algo = "dfs"
-        # self.layout, self.window = maze_helpers.get_layout_and_window()
-        # self.g = self.window['-GRAPH-']
-
-    def test_dfs_search(self):
-        pass
-
-    def test_bfs_search(self):
-        pass
-
-    def test_astar_search(self):
-        pass
