@@ -1,4 +1,7 @@
-MAZE_FILE = "/home/batman/Desktop/algoGUI/scripts/gui_code/gui_mazes/test_maze.txt"
+import os
+
+ROOT_DIR=os.path.dirname(os.path.abspath(__file__)) 
+MAZE_FILE = os.path.join(ROOT_DIR, "gui_code/gui_mazes/test_maze.txt")
 
 
 PLAYER = "P"
