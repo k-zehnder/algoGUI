@@ -63,7 +63,7 @@ class Maze(MazeSettings):
         self.maze_dimensions = maze_dimensions
         self.maze_obstacles = maze_obstacles
         self.player_start_pos = player_start_pos
-        self.goal_xy = opponent_start_pos # (7, 7)
+        self.goal_xy = opponent_start_pos
         self.current_algo = "dfs"
         self.path_found = False
         self.current = 0
@@ -83,42 +83,42 @@ class Maze(MazeSettings):
                                                 self.goal_xy
                                             )
 
-    def draw_path_to_goal(self, algo: str):
+    def draw_path_to_goal(self):
         path_to_goal = self.find_path_to_goal()
-        self.draw_treasure(path_to_goal, self.player_start_pos, self.window, self.g)
+        self.draw_treasure(path_to_goal)
         self.path_found = True
 
-    def draw_maze(self, g, maze_grid: list, maze_dimensions: tuple):
-        for row in range(maze_dimensions[0]):
-            for col in range(maze_dimensions[1]):
-                if maze_grid[row][col] == "*":
-                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='black')        
-                elif maze_grid[row][col] == "P":
-                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='orange')
+    def draw_maze(self):
+        for row in range(self.maze_dimensions[0]):
+            for col in range(self.maze_dimensions[1]):
+                if self.maze_grid[row][col] == "*":
+                    self.g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='black')        
+                elif self.maze_grid[row][col] == "P":
+                    self.g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='orange')
                     letter_location = (col * self.BOX_SIZE + 18, row * self.BOX_SIZE + 17)
-                    g.draw_text('start',
+                    self.g.draw_text('start',
                                 letter_location, font='Courier 15')             
-                elif maze_grid[row][col] == "O":
-                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='yellow')
+                elif self.maze_grid[row][col] == "O":
+                    self.g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='yellow')
                     letter_location = (col * self.BOX_SIZE + 18, row * self.BOX_SIZE + 17)
-                    g.draw_text('goal',
+                    self.g.draw_text('goal',
                                 letter_location, font='Courier 15')          
                 else:
-                    g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='white')  
+                    self.g.draw_rectangle((col * self.BOX_SIZE + 5, row * self.BOX_SIZE + 3), (col * self.BOX_SIZE + self.BOX_SIZE + 5, row * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='white')  
                     
-    def draw_treasure(self, path_to_goal: list, player_start_pos: tuple, window, g):
+    def draw_treasure(self, path_to_goal):
             for i, (x, y) in enumerate(path_to_goal):
-                if (x,y) not in [player_start_pos, path_to_goal[-1]]: 
-                    g.draw_rectangle((x * self.BOX_SIZE + 5, y * self.BOX_SIZE + 3), (x * self.BOX_SIZE + self.BOX_SIZE + 5, y * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='green')
+                if (x,y) not in [self.player_start_pos, path_to_goal[-1]]: 
+                    self.g.draw_rectangle((x * self.BOX_SIZE + 5, y * self.BOX_SIZE + 3), (x * self.BOX_SIZE + self.BOX_SIZE + 5, y * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='green')
                     letter_location = (x * self.BOX_SIZE + 18, y * self.BOX_SIZE + 17)
-                    g.draw_text('{}'.format(i),
+                    self.g.draw_text('{}'.format(i),
                                 letter_location, font='Courier 25')
                 else:
-                    g.draw_rectangle((x * self.BOX_SIZE + 5, y * self.BOX_SIZE + 3), (x * self.BOX_SIZE + self.BOX_SIZE + 5, y * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='orange')
+                    self.g.draw_rectangle((x * self.BOX_SIZE + 5, y * self.BOX_SIZE + 3), (x * self.BOX_SIZE + self.BOX_SIZE + 5, y * self.BOX_SIZE + self.BOX_SIZE + 3), line_color='red', fill_color='orange')
                     letter_location = (x * self.BOX_SIZE + 18, y * self.BOX_SIZE + 17)
-                    g.draw_text('{}'.format(i),
+                    self.g.draw_text('{}'.format(i),
                             letter_location, font='Courier 25')
-                window.refresh()
+                self.window.refresh()
                 time.sleep(0.5)
 
     def get_layout_and_window(self):
@@ -149,7 +149,7 @@ class Maze(MazeSettings):
         
     def animation_loop(self):
         self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
-        self.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
+        self.draw_maze()
 
         while True:            
             event, values = self.window.read()
@@ -159,15 +159,15 @@ class Maze(MazeSettings):
             elif event == 'toggle algorithm':
                 self.current_algo = self.toggle_algo()
                 self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
-
+                
             elif event == 'draw path to goal':
                 if self.path_found:
                     print('[INFO] resetting maze...')
-                    self.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
-                self.draw_path_to_goal(self.current_algo)
+                    self.draw_maze()
+                self.draw_path_to_goal()
 
             elif event == 'reset':
-                self.draw_maze(self.g, self.maze_grid, self.maze_dimensions)
+                self.draw_maze()
                 
 if __name__ == "__main__":
     mh = MazeHelpers()
