@@ -130,7 +130,7 @@ class Maze(MazeSettings):
         [sg.Text('Maze Solver', font="Times 20", justification='center')],
         [sg.Graph((600, 600), (0, 260), (260, 0), key='-GRAPH-',
                     change_submits=True, drag_submits=False)],
-        [sg.Text("", size=(30, 2), font="Times 15", key='-TEXT-')],
+        [sg.Text("", size=(35, 2), font="Times 15", key='-TEXT-')],
         [sg.Button('draw path to goal'), sg.Button('reset'),sg.Button('toggle algorithm'), sg.Button('exit')]
         ]
 
