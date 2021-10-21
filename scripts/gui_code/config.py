@@ -16,6 +16,7 @@ SCORE_FONT = ("Courier", 24, "bold")
 GAME_OVER_FONT = ("Courier", 18, "normal")
 SOUND = True
 BOX_SIZE = 25
+GAME_SPEED=0.25
 # offsets = {
 #     "right": (0, 1),
 #     "left": (0, -1),

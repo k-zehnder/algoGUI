@@ -119,7 +119,7 @@ class Maze(MazeSettings):
                     self.g.draw_text('{}'.format(i),
                             letter_location, font='Courier 25')
                 self.window.refresh()
-                time.sleep(0.5)
+                time.sleep(self.GAME_SPEED)
 
     def get_layout_and_window(self):
         layout = [
@@ -159,7 +159,7 @@ class Maze(MazeSettings):
             elif event == 'toggle algorithm':
                 self.current_algo = self.toggle_algo()
                 self.window['-TEXT-'].update(f"Current search algorithm: {self.current_algo}")
-                
+
             elif event == 'draw path to goal':
                 if self.path_found:
                     print('[INFO] resetting maze...')

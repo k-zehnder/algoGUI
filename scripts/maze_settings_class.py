@@ -24,6 +24,7 @@ class MazeSettings:
         self.HEIGHT=800
         self.SOUND=False
         self.BOX_SIZE=25
+        self.GAME_SPEED=0.25
 
 if __name__ == "__main__":
     ms = MazeSettings()
