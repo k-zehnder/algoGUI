@@ -1,6 +1,6 @@
 import os
 
-ROOT_DIR=os.path.dirname(os.path.abspath(__file__)) 
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__)) 
 MAZE_FILE = os.path.join(ROOT_DIR, "gui_code/gui_mazes/test_maze.txt")
 
 
@@ -16,7 +16,7 @@ SCORE_FONT = ("Courier", 24, "bold")
 GAME_OVER_FONT = ("Courier", 18, "normal")
 SOUND = True
 BOX_SIZE = 25
-GAME_SPEED=0.25
+GAME_SPEED = 0.25
 # offsets = {
 #     "right": (0, 1),
 #     "left": (0, -1),
