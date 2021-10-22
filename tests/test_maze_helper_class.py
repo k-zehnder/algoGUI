@@ -1,4 +1,4 @@
-from scripts.maze_helper_class import MazeHelpers
+from scripts.maze_helper_class import MazeHelpers, Maze
 
 
 class Test:
@@ -25,3 +25,4 @@ class Test:
     def test_read_maze_from_file(self):
         params_dict = self.helpers_class.read_maze_from_file()
         assert {k:v for (k, v) in params_dict.items()} == {k:v for (k, v) in self.expected_output.items()}
+
