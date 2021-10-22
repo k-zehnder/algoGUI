@@ -1,5 +1,6 @@
 from maze_helper_class import MazeHelpers, Maze
 
+
 if __name__ == "__main__":
     # get parameters for game
     helpers_class = MazeHelpers()
