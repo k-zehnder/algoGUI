@@ -30,6 +30,7 @@ class MazeHelpers(MazeSettings):
                     if len(row) != num_cols_top_row:
                         print("The maze is not rectangular.")
                         raise SystemExit
+                        
                 # Find obstacles and initial positions for player and opponent
                 maze_obstacles = []
                 for i in range(num_rows):
