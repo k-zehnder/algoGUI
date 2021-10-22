@@ -78,7 +78,6 @@ class Maze(MazeSettings):
 
     def find_path_to_goal(self) -> list:
         return self.algo_dict[self.current_algo](self.maze_grid, self.player_start_pos, self.goal_xy)
-                                            
 
     def draw_path_to_goal(self):
         path_to_goal = self.find_path_to_goal()
