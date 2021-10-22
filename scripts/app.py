@@ -1,4 +1,3 @@
-# www.meet-kevin-z.com
 from maze_helper_class import MazeHelpers, Maze
 
 if __name__ == "__main__":
