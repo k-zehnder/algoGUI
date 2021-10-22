@@ -1,8 +1,7 @@
 # www.meet-kevin-z.com
+from maze_helper_class import MazeHelpers, Maze
 
 if __name__ == "__main__":
-    from maze_helper_class import MazeHelpers, Maze
-
     # get parameters for game
     helpers_class = MazeHelpers()
     params_dict = helpers_class.read_maze_from_file()
